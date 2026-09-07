@@ -1,0 +1,38 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @param {number} k
+     * @return {number[]}
+     */
+    maxSlidingWindow(nums, k) {
+        let deque = [];
+    let result = [];
+
+    for (let i = 0; i < nums.length; i++) {
+
+        // Window se bahar ke indices remove karo
+        while (deque.length > 0 && deque[0] <= i - k) {
+            deque.shift();
+        }
+
+        // Chhoti values ko remove karo
+        while (
+            deque.length > 0 &&
+            nums[deque[deque.length - 1]] <= nums[i]
+        ) {
+            deque.pop();
+        }
+
+        // Current index add karo
+        deque.push(i);
+
+        // Window complete hone ke baad maximum add karo
+        if (i >= k - 1) {
+            result.push(nums[deque[0]]);
+        }
+    }
+
+    return result;
+
+    }
+}
