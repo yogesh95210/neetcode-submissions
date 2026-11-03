@@ -1,0 +1,16 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        def binary_search(left: int, right: int) -> int:
+            # Base case: when pointers meet
+            if left == right:
+                return nums[left]
+                
+            mid = (left + right) // 2
+            
+            if nums[mid] > nums[right]:
+                return binary_search(mid + 1, right)
+            else:
+                return binary_search(left, mid)
+
+        return binary_search(0, len(nums) - 1)
+        
